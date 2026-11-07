@@ -26,3 +26,15 @@ bq.style.transition='opacity .3s';go(0);setInterval(()=>go((k+1)%items.length),7
 document.querySelectorAll('.hero-sound').forEach(b=>b.onclick=()=>{const v=b.parentElement.querySelector('video');v.muted=!v.muted;b.textContent=v.muted?'♪':'❚❚'});
 // form
 document.querySelector('form.form')?.addEventListener('submit',e=>{e.preventDefault();const f=e.target;f.innerHTML='<div class="field full" style="padding:60px 0;text-align:center"><p class="eyebrow" style="justify-content:center">Tack</p><h3 class="h-md mt">Vi har tagit emot din förfrågan.</h3><p class="lead mt" style="margin-inline:auto">Rakesh återkommer personligen inom 24 timmar med tillgänglighet och ett förslag.</p></div>'});
+// YouTube montage hero
+const ytbg=document.getElementById('ytbg');
+if(ytbg){const clips=JSON.parse(ytbg.dataset.clips);let k=0,players=[],ready=0,cur=0;
+const s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';document.head.append(s);
+window.onYouTubeIframeAPIReady=()=>{['ytA','ytB'].forEach((id,n)=>{players[n]=new YT.Player(id,{videoId:clips[n][0],playerVars:{autoplay:0,mute:1,controls:0,rel:0,playsinline:1,modestbranding:1,iv_load_policy:3,disablekb:1,start:clips[n][1]},events:{onReady:e=>{e.target.mute();if(++ready===2)play(0)}}})})};
+const load=(p,c)=>p.loadVideoById({videoId:c[0],startSeconds:c[1]});
+function play(n){const p=players[cur],c=clips[k%clips.length];
+ if(n===0){load(p,c)}
+ const fr=p.getIframe();const on=()=>{if(p.getPlayerState()===1){players.forEach(q=>q.getIframe().classList.toggle('show',q===p));const other=players[1-cur],nx=clips[(k+1)%clips.length];
+   setTimeout(()=>{load(other,nx);setTimeout(()=>other.pauseVideo(),400)},1500);
+   setTimeout(()=>{k++;const old=players[cur];cur=1-cur;players[cur].playVideo();setTimeout(()=>old.pauseVideo(),1300);play(1)},c[2]*1000)}else setTimeout(on,200)};on()}
+}

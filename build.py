@@ -1,5 +1,5 @@
 import re
-H={'rakesh_cam':'f8e2fb_0dbd831774bf4e0c8e5d7c2320b722c7~mv2.jpg','rings':'f8e2fb_1f6669bbe9c64085b5b18fc5caa5e59b~mv2.jpg',
+H={'logo':'f8e2fb_2bfb1152f5934579974cc6b8b0857178~mv2.jpeg','rakesh_cam':'f8e2fb_0dbd831774bf4e0c8e5d7c2320b722c7~mv2.jpg','rings':'f8e2fb_1f6669bbe9c64085b5b18fc5caa5e59b~mv2.jpg',
 'sthlm1':'f8e2fb_391a87b0e6db47ad9af845f6870ac6c1~mv2.jpg','mandap':'f8e2fb_40aa49058b954da69d7b56a30a78333b~mv2.jpeg',
 'highland':'f8e2fb_4f65eb1f6b1544ff9db5b09090f36d62~mv2.jpg','sthlm2':'f8e2fb_80a48619fade422290f0b617b0478c30~mv2.jpg',
 'confetti':'f8e2fb_8273bd17731c461189a47ac2934cc526~mv2.jpg','lights1':'f8e2fb_84128d18f31047908ed9ede20b9280d7~mv2.jpg',
@@ -20,11 +20,11 @@ def page(fn,title,desc,body):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css"></head><body>
-<header class="nav"><div class="wrap"><a href="index.html" class="logo" aria-label="R Creations Films"><span class="logo-mark">R</span><span class="logo-txt">R·CREATIONS<small>FILMS · STOCKHOLM</small></span></a>
+<header class="nav"><div class="wrap"><a href="index.html" class="logo" aria-label="R Creations Films"><img class="logo-img" src="https://static.wixstatic.com/media/f8e2fb_2bfb1152f5934579974cc6b8b0857178~mv2.jpeg/v1/crop/x_112,y_0,w_425,h_425/fill/w_120,h_120,q_90/logo.jpg" alt="R-Creations logga"><span class="logo-txt">R·CREATIONS<small>FILMS · STOCKHOLM</small></span></a>
 <nav><ul class="menu">{links}<li><a href="kontakt.html" class="btn btn-gold">Boka konsultation</a></li></ul></nav><button class="burger" aria-label="Meny"><span></span><span></span></button></div></header>
 {body}
 <footer class="footer"><div class="wrap"><div class="f-top">
-<div><a href="index.html" class="logo"><span class="logo-mark">R</span><span class="logo-txt">R·CREATIONS<small>MAKING MOMENTS MEMORABLE</small></span></a>
+<div><a href="index.html" class="logo"><img class="logo-img" src="https://static.wixstatic.com/media/f8e2fb_2bfb1152f5934579974cc6b8b0857178~mv2.jpeg/v1/crop/x_112,y_0,w_425,h_425/fill/w_120,h_120,q_90/logo.jpg" alt="R-Creations logga"><span class="logo-txt">R·CREATIONS<small>MAKING MOMENTS MEMORABLE</small></span></a>
 <p class="f-big">Låt oss berätta<br>er historia.</p><a href="kontakt.html" class="btn btn-gold">Kontrollera ert datum {ARR}</a>
 <div class="socials"><a href="https://www.instagram.com/rcreations_films" target="_blank" rel="noopener" aria-label="Instagram">{IG}</a><a href="mailto:rcreationsfilms@gmail.com" aria-label="E-post">{MAIL}</a><a href="tel:+46736172520" aria-label="Telefon">{PH}</a></div></div>
 <div><h4>Utforska</h4><ul><li><a href="portfolio.html">Portfolio</a></li><li><a href="tjanster.html">Tjänster &amp; paket</a></li><li><a href="om.html">Om oss</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></div>
@@ -39,6 +39,12 @@ def hero(vid,poster,eyebrow,h1,lead,b1,b2,cls=''):
 <div class="wrap"><span class="eyebrow rv">{eyebrow}</span><h1 class="h-xl rv d1">{h1}</h1><p class="lead rv d2">{lead}</p>
 <div class="hero-ctas rv d3"><a href="{b1[0]}" class="btn btn-gold">{b1[1]} {ARR}</a><a href="{b2[0]}" class="btn btn-ghost">{b2[1]}</a></div></div>
 <div class="hero-meta"><span>Scrolla</span><div class="scroll-cue"></div></div></section>'''
+
+def yt_hero(poster,eyebrow,h1,lead,b1,b2):
+  return f'''<section class="hero"><img class="hero-img" src="{poster}" alt=""><div class="yt-bg" id="ytbg" data-clips='[["6uLsjLo05H8",4,10],["_J_B7MFWRCE",20,9],["4kQI4XJ8hCg",8,9],["_J_B7MFWRCE",95,9],["9AXDnD7KPv4",6,9],["6uLsjLo05H8",22,9],["_J_B7MFWRCE",150,9]]'><div id="ytA"></div><div id="ytB"></div></div>
+<div class="wrap"><span class="eyebrow rv">{eyebrow}</span><h1 class="h-xl rv d1">{h1}</h1><p class="lead rv d2">{lead}</p>
+<div class="hero-ctas rv d3"><a href="{b1[0]}" class="btn btn-gold">{b1[1]} {ARR}</a><a href="{b2[0]}" class="btn btn-ghost">{b2[1]}</a></div></div>
+<div class="hero-meta"><span>Filmat av R-Creations</span><div class="scroll-cue"></div></div></section>'''
 
 def marquee(words):
   s=''.join(f'<span>{w}</span>' for w in words)*2
@@ -112,12 +118,12 @@ CTA=f'''<section class="cta"><video autoplay muted loop playsinline poster="{I('
 INSTA='<section style="padding:90px 0 0;background:var(--paper)"><div class="wrap s-head"><div><span class="eyebrow">Instagram</span><h2 class="h-md">@rcreations_films</h2></div><a class="btn btn-line" href="https://www.instagram.com/rcreations_films" target="_blank" rel="noopener">Följ oss '+ARR+'</a></div><div class="insta">'+''.join(f'<a href="https://www.instagram.com/rcreations_films" target="_blank" rel="noopener"><img src="{I(k,500)}" alt="" loading="lazy"></a>' for k in ['ayushi','confetti','dubai2','lights1','sthlm2','mandap'])+'</div></section>'
 
 def projects(n=4):
-  items=[('ayushi-tejbir','ayushi','Indiskt bröllop','Ayushi &amp; Tejbir','Sverige','wide'),('dubai','dubai2','Destination','Dubai Skyline','UAE',''),
+  items=[('ayushi-tejbir','mandap','Indiskt bröllop','Ayushi &amp; Tejbir','Sverige','wide'),('dubai','dubai2','Destination','Dubai Skyline','UAE',''),
    ('stockholm','sthlm1','Bröllop','Gamla stan','Stockholm',''),('highlands','highland','Elopement','Highlands','Skottland','')]
   return '<div class="projects">'+''.join(f'<a href="{s}.html" class="proj {c} rv"><div class="proj-media"><img src="{I(k,1800)}" alt="{t}" loading="lazy"><span class="proj-tag">{tg}</span></div><div class="proj-info"><div><h3>{t}</h3><span>{l}</span></div><span class="arrow">{ARR}</span></div></a>' for s,k,tg,t,l,c in items[:n])+'</div>'
 
 # INDEX
-idx=hero(4446328,I('ayushi',1800),'Bröllopsfoto &amp; film · Stockholm','Kärlek, fångad <span class="serif gold">precis</span> som den kändes.',
+idx=yt_hero(I('sthlm2',1800),'Bröllopsfoto &amp; film · Stockholm','Kärlek, fångad <span class="serif gold">precis</span> som den kändes.',
  'Vi fotograferar, filmar och formger bröllop i Sverige och världen över — så att ni kan återuppleva dagen, ögonblick för ögonblick.',
  ('kontakt.html','Boka konsultation'),('portfolio.html','Se vårt arbete'))
 idx+=marquee(['Making moments memorable','Bröllop','Indiska bröllop','Destination','Film','Dekor','Event'])
